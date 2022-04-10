@@ -1,0 +1,30 @@
+-natopotato
+-- just a cheat sheet text doc containing some info i found noteworthy
+
+Capturing GIFs for showing off
+ScreenToGif -- https://github.com/NickeManarin/ScreenToGif
+Use Gifski - set somewhat high quality, 30fps will do
+
+Gamestate Machine
+enum GAME_STATE
+{
+	GS_MENU = 0,
+	GS_RESET = 1,
+	...
+	GS_RESULT
+} nGameState, nNextState;
+switch (nGameState)
+{
+case GS_MENU:
+{
+
+	nNextState = GS_RESET;
+}
+break;
+case GS_RESET
+{
+	...
+}
+}
+nGameState = nNextState;
+
