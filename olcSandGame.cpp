@@ -83,56 +83,6 @@ private:
 	}
 };
 
-struct hsv	// TODO
-{
-	double h;
-	double s;
-	double v;
-};
-
-class spr_button
-{
-
-public:
-	olc::vi2d pos;
-	olc::vi2d size;
-
-	bool bHeld;
-	bool bPressed;
-	bool bReleased;
-	bool bHover;
-
-private:
-	olc::Sprite* sprSheet;
-	int sprWidth;
-
-	// Sprite sheet 3 sprites in this order:
-	// sprNormal;
-	// sprHover;
-	// sprPressed;
-
-public:
-	spr_button(olc::Sprite* spr)
-	{
-
-	}
-
-	void update(olc::PixelGameEngine* p)
-	{
-		bHover = (point_is_in_rect(p->GetMousePos(), pos, size));
-	}
-
-	void draw(olc::PixelGameEngine* p)
-	{
-	}
-
-private:
-	bool point_is_in_rect(olc::vi2d p, olc::vi2d pos, olc::vi2d size)
-	{
-		return (p.x >= pos.x && p.y >= pos.y && p.x < pos.x + size.x && p.y < pos.y + size.y);
-	}
-};
-
 class Program : public olc::PixelGameEngine
 {
 public:
@@ -248,22 +198,19 @@ public:
 
 		DrawStringShaded(513, 205, "SPACE: Pause");
 		DrawStringShaded(513, 215, "simulation");
+		
+		DrawStringShaded(513, 235, "ESC: Exit");
 
 		if (!isRunning)
 			DrawStringShaded(40, 330, "PAUSED");
 
-
-
 		DrawStringShaded(542, 320, "Made by");
 		DrawStringShaded(518, 330, "Nate Robinson");
-
 
 		mouse_info_offset = (GetMouseY() < ScreenHeight() - 20) ? 10 : -10;
 
 		if (in_bounds(mouseWorldPos.x, mouseWorldPos.y))
 			DrawStringShaded(GetMouseX() + 10, GetMouseY() + mouse_info_offset, mat_name_bank[vMap[xy_to_i(mouseWorldPos.x, mouseWorldPos.y)].mat_id]);
-			
-
 
 		return true;
 	}
@@ -613,7 +560,7 @@ public:
 int main()
 {
 	Program game;
-	if (game.Construct(640, 360, 2, 2, false))
+	if (game.Construct(640, 360, 2, 2, true))
 		game.Start();
 
 	return 0;
