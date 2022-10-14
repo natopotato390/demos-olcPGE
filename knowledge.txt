@@ -1,11 +1,18 @@
--natopotato
+- natopotato
 -- just a cheat sheet text doc containing some info i found noteworthy
+---------------------------------------------------------------------------------------------------
+- 2D to 1D	// NOTE ONLY WORKS WITH SQUARE GRIDS
+[x * w + y] 
 
-Capturing GIFs for showing off
+- 1D to 2D
+x = [x / w]
+y = [y % h]
+---------------------------------------------------------------------------------------------------
+- Capturing GIFs for showing off
 ScreenToGif -- https://github.com/NickeManarin/ScreenToGif
 Use Gifski - set somewhat high quality, 30fps will do
-
-Gamestate Machine
+---------------------------------------------------------------------------------------------------
+- Gamestate Machine
 enum GAME_STATE
 {
 	GS_MENU = 0,
@@ -27,4 +34,62 @@ case GS_RESET
 }
 }
 nGameState = nNextState;
+---------------------------------------------------------------------------------------------------
+- Quote from Half-Life: Alyx - Final Hours:
+"'We sort of had to collectively admit we were wrong on the premise that you will be happiest
+if you work on something you personally want to work on the most,' Walker says. 
+'Instead, we decided as a group that we would all be happier if we worked on a big thing,
+even if it's not exactly what we wanted to work on.'"
+
+don't fall into "the wilderness" like Valve did, get in there and finish that project.
+---------------------------------------------------------------------------------------------------
+- Passing in PGE for draw functions
+void Draw(olc::PixelGameEngine *p) {
+	p->DrawRect(....)
+}
+...
+
+classobject.Draw(this);
+---------------------------------------------------------------------------------------------------
+- i always forget this one
+FPS = 1 / frameTime
+frameTime = 1 / FPS
+---------------------------------------------------------------------------------------------------
+- All PGE drawing functions
+Clear(Col);				// Clear Screen
+Draw(x,y,Col); 				// Point
+DrawLine(x1,y1,x2,y2,Col); 		// Line
+DrawCircle(x,y,r,Col);			// Circle
+FillCircle(x,y,r,Col);			// Filled Circle
+DrawRect(x,y,w,h,Col);			// Rectangle
+FillRect(x,y,w,h,Col);			// Filled Rectangle
+DrawTriangle(x1,y1,x2,y2,x3,y3,Col);	// Triangle
+FillTriangle(x1,y1,x2,y2,x3,y3,Col);	// Filled Triangle
+DrawSprite(x,y,Sprite,Scale,Flip);	// Sprite
+DrawString(x,y,Str,Pixel,Scale);	// Text
+---------------------------------------------------------------------------------------------------
+- Opening and writing to files
+#include <fstream>
+
+std::ofstream file("filename.txt");
+if (!file.is_open())
+    std::cout << "Failed to open file.\n";
+else 
+{
+    file.write(fileString.c_str(), fileString.size());
+}
+file.close();
+---------------------------------------------------------------------------------------------------
+- Get mouse scroll as 1 or -1
+GetMouseWheel() / 120
+---------------------------------------------------------------------------------------------------
+- Load sprites!
+std::unique_ptr<olc::Sprite> sprExample;
+- In OnUserCreate()...
+sprExample = std::make_unique<olc::Sprite>("./path/to/sprite.png");
+DrawSprite(..., sprExample.get());
+
+
+
+
 
